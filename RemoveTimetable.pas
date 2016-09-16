@@ -26,7 +26,7 @@ var
 implementation
 
 uses
-  TCGlobals, uAMGConst, TCommon;
+  TimeChartGlobals, uAMGConst, TCommon;
 
 {$R *.dfm}
 

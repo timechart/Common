@@ -88,7 +88,7 @@ var
 implementation
 
 uses
-  uAMGHealthCondition, TCglobals, uAMGStudent, uAMGConst, EditHealthCondition,
+  uAMGHealthCondition, TimeChartGlobals, uAMGStudent, uAMGConst, EditHealthCondition,
   ShellAPI, uAMGCommon, CreateHealthCondition;
 
 {$R *.dfm}

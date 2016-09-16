@@ -31,7 +31,7 @@ object FrmRemoveTimetable: TFrmRemoveTimetable
     Width = 218
     Height = 21
     Style = csDropDownList
-    ItemHeight = 13
+    ItemHeight = 0
     TabOrder = 0
   end
   object btnClose: TBitBtn

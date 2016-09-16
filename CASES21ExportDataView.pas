@@ -65,7 +65,7 @@ var
 implementation
 
 uses
-  TCGlobals, uAMGCommon;
+  TimeChartGlobals, uAMGCommon;
 
 {$R *.dfm}
 

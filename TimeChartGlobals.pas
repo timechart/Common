@@ -1,4 +1,4 @@
-unit TCglobals;    {global variables and constants}
+unit TimeChartGlobals;    {global variables and constants}
 
 interface
 
@@ -362,6 +362,8 @@ type
 
 var
 
+  DevMode: boolean = False;
+
   FileNames: TFileNames;
 //  studID2: array[0..nmbrstudents] of string[szID];
   studID2: array[0..nmbrstudents] of string[50];
@@ -402,9 +404,9 @@ var
   usrPassBKUP:            boolean;
 
   usrpassAlter:           bool;
-  usrPassRecord:          smallint;
+  CurrentUserRecordIndex:          smallint;
 
-  numpass:                smallint;
+  UserRecordsCount:                smallint;
   NEW_DateChecks:         array[0..41] of tDateTime;
  //track which sections the user has locked at any stage
   usrDataSectionLocked: array[1..accessCountMax] of bool;
@@ -1356,5 +1358,6 @@ initialization
 
 
 end.
+
 
 

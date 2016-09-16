@@ -39,9 +39,9 @@ implementation
 uses
   Windows, Forms, SysUtils, Graphics,
   {$IF PTI} then
-    PTIglobals, TCGlobals
+    PTIglobals, TimeChartGlobals
   {$ELSEIF TC6NET} then
-  TCGlobals
+  TimeChartGlobals
   {$IFEND}
   DateUtils, urlmon, uAMGTeacherAbsence, IDGlobal, uAMGConst, AbZipper, LoadProgress;
 

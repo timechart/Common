@@ -96,7 +96,7 @@ var
 implementation
 
 uses
-  TCGlobals, TCommon2, uAMGTeacher, uAMGSubject, CommCtrl, Clipbrd;
+  TimeChartGlobals, TCommon2, uAMGTeacher, uAMGSubject, CommCtrl, Clipbrd;
 
 {$R *.dfm}
 

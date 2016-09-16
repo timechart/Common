@@ -79,7 +79,7 @@ var
 implementation
 
 uses
-  uAMGTeacher, TCommon, TCGlobals;
+  uAMGTeacher, TCommon, TimeChartGlobals;
 
 {$R *.dfm}
 

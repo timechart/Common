@@ -41,6 +41,10 @@ object FrmHealthCondition: TFrmHealthCondition
       OnChange = RefreshPeerSupportGroup
       object tabStudent: TTabSheet
         Caption = 'Student'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         DesignSize = (
           596
           394)
@@ -174,7 +178,7 @@ object FrmHealthCondition: TFrmHealthCondition
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
-          ItemHeight = 13
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
           OnClick = RefreshStudentHealthConditions
@@ -281,6 +285,10 @@ object FrmHealthCondition: TFrmHealthCondition
       object tabHealthCond: TTabSheet
         Caption = 'Health Condition'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lblHealthCondName: TLabel
           Left = 15
           Top = 13
@@ -340,7 +348,7 @@ object FrmHealthCondition: TFrmHealthCondition
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
-          ItemHeight = 13
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
           OnChange = RefreshHealthConditionDetails
@@ -359,6 +367,10 @@ object FrmHealthCondition: TFrmHealthCondition
       object tabPeerSupportGroup: TTabSheet
         Caption = 'Peer Support Group'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lblPeerSupportGroups: TLabel
           Left = 15
           Top = 24
@@ -372,7 +384,7 @@ object FrmHealthCondition: TFrmHealthCondition
           Width = 250
           Height = 21
           Hint = 'Select a Peer Support Group.'
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 0
           OnClick = RefreshStudentsInPeerSupportGroup
         end

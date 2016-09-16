@@ -223,7 +223,7 @@ object FrmEditTag: TFrmEditTag
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
-    ItemHeight = 13
+    ItemHeight = 0
     MaxLength = 2
     ParentFont = False
     TabOrder = 0

@@ -3,7 +3,7 @@ unit CopyTT;
 interface
 
 uses SysUtils, WinTypes, WinProcs, Classes, Graphics, Forms, Controls, Buttons,
-  StdCtrls, ExtCtrls, TabNotBk, Dialogs, ComCtrls, TcGlobals;
+  StdCtrls, ExtCtrls, TabNotBk, Dialogs, ComCtrls, TimeChartGlobals;
 
 type
    TFrmCopyTT = class(TForm)

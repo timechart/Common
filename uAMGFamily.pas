@@ -59,7 +59,7 @@ var
 implementation
 
 uses
-  SysUtils, CLasses, TCGlobals, uAMGCommon;
+  SysUtils, CLasses, TimeChartGlobals, uAMGCommon;
 
 { TAMGFamily }
 

@@ -29,7 +29,7 @@ var
 implementation
 
 uses
-  uAMGClassSubject, LoadProgress, TcGlobals, TCommon, uAMGConst, TCommon2;
+  uAMGClassSubject, LoadProgress, TimeChartGlobals, TCommon, uAMGConst, TCommon2;
 
 {$R *.dfm}
 

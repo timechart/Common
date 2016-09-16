@@ -39,7 +39,7 @@ implementation
 
 uses
   uAMGTeacher, uAMGConst, uAMGCommon, uAMGTimeTable, uAMGSubject, EdHouse,
-  TeWnd, RoWnd, SuWnd, uAMGGlobal, TCommon, TCGlobals, TCLoad, StCommon,
+  TeWnd, RoWnd, SuWnd, uAMGGlobal, TCommon, TimeChartGlobals, TCLoad, StCommon,
   Clipbrd, HouseWnd, uAMGClassSubject, Tcommon2;
 
 {$R *.dfm}

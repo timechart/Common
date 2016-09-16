@@ -26,7 +26,7 @@ var
 implementation
 
 uses
-  TCglobals, Block1;
+  TimeChartGlobals, Block1;
 
 {$R *.dfm}
 

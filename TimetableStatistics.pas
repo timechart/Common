@@ -32,7 +32,7 @@ var
 implementation
 
 uses
-  uAMGSubject, uAMGCommon, TCommon, TCGlobals;
+  uAMGSubject, uAMGCommon, TCommon, TimeChartGlobals;
 
 {$R *.dfm}
 

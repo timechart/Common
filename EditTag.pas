@@ -37,7 +37,7 @@ var
 implementation
 
 uses
-  TCGlobals, uAMGStudent;
+  TimeChartGlobals, uAMGStudent;
 
 {$R *.dfm}
 

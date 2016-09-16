@@ -50,7 +50,7 @@ var
 implementation
 
 uses
-  TCglobals, uAMGConst, tcommon, TCLoad, Main;
+  TimeChartGlobals, uAMGConst, tcommon, TCLoad, Main;
 
 {$R *.dfm}
 
