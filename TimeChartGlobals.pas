@@ -173,7 +173,7 @@ const
       +' used for duties rather than lessons.',                                     //36
     'When your timetable is nearly complete, use Room Fill to add missing rooms.'); //37
 
-  UserPasswordFilename='TCWP52.DAT';
+  OldUserPasswordFilename='TCWP52.DAT';
   myLogOnFileExt='.ON';
   accessCountMax=120;
 
@@ -312,8 +312,6 @@ type
   tpTtDayBlock = array [1..szTTDayBlock] of byte;
   tpWSBlock = array of byte;
   tpWSFclash = array [0..nmbrblocks] of smallint;
- {network version types}
-      tpPassData = array[0..nmbrUsers] of smallint;  
 
 type
   tpWinPos = record
@@ -381,13 +379,9 @@ var
   Transfer2Caption: string='Transfer 2';
 
   {passwords}
-  passID:    array[0..nmbrUsers] of string[szPassID];
-  password:  array[0..nmbrUsers] of string[szPassword];
-  passlevel: tpPassdata;
-  passUserDir: array[0..nmbrUsers] of string[szUserDirName];
-  passyear:  tpPassdata;
+
+
   passcount: array[0..10] of smallint;
-  passBKUP:  array[0..nmbrUsers] of boolean;
 
   genderShort: array[0..1] of string[1]=('M','F');
   genderLong: array[0..1] of string=('Male','Female');  
