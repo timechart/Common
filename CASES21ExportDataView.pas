@@ -95,7 +95,7 @@ var
 begin
   lCurrentDir := GetCurrentDir;
   try
-    SetCurrentDir(DataDir);
+    SetCurrentDir(Directories.DataDir);
     lDataList := TStringList.Create;
     FDataFound := False;
     try

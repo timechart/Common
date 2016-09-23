@@ -293,6 +293,31 @@ type
     property  CurentTimeTableConfiguration: string read getTimeTableInuseDataFile;
   end;
 
+  {names of directories}
+  TDirectories = class
+    // loads from DIR.SYS in application directory
+    //  First line is progdir second is datdire
+    // D:\amig\Source\TCNET
+    // C:\TimeChartJim\20y1
+    private
+      fdatadir: String;
+      function GetDataDir: string;
+      procedure SetDataDir(_value: string);
+    public
+        progdir: String[szDirName];
+        UsersDir: String[szDirName];
+        blockdir: String[szDirName];
+        textdir: String[szDirName];
+        timedir: String[szDirName];
+        browsedir: String[szDirName];
+        RMExportDir: string;
+        userDir:      String[szUserDirName];
+        defDataDir:   String[szDirName];
+        property datadir: String read GetDataDir write SetDataDir;
+    end;
+
+
+
 
   tpIntPoint = ^ smallint;
   tpBytePoint = ^ byte;
@@ -363,6 +388,7 @@ var
   DevMode: boolean = False;
 
   FileNames: TFileNames;
+  Directories: TDirectories;
 //  studID2: array[0..nmbrstudents] of string[szID];
   studID2: array[0..nmbrstudents] of string[50];
   studEmail: array[0..nmbrstudents] of string[100];
@@ -913,19 +939,6 @@ var
   blockAccess:  array[0..nmbryears] of boolean;
   yearAccess:   array[0..nmbryears] of boolean;
 
-  {names of directories}
-  progdir: String[szDirName];
-  UsersDir: String[szDirName];
-  datadir: String[szDirName];
-  blockdir: String[szDirName];
-  textdir: String[szDirName];
-  timedir: String[szDirName];
-  browsedir: String[szDirName];
-  RMExportDir: string;
-
-  userDir:      String[szUserDirName];
-  defDataDir:   String[szDirName];
-
   ourSafetyMemStream: TStream;
   ourSafetyMemStreamStr: string;
 
@@ -1347,9 +1360,26 @@ begin
     FTimeTable :=  _value;
 end;
 
+{ TDirectories }
+
+
+function TDirectories.GetDataDir: string;
+begin
+   Result := fDataDir;
+end;
+
+procedure TDirectories.SetDataDir(_value: string);
+begin
+   fDataDir :=  _value;
+end;
+
 initialization
   FileNames:= TFileNames.Create;
+  Directories:= TDirectories.Create;
 
+finalization
+  FileNames.free;
+  Directories.Free;
 
 end.
 

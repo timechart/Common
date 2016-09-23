@@ -126,7 +126,7 @@ begin
           TempList.Add(GetSubStr(aStr, 2) + ',' + GetSubStr(aStr, 1));
         end;
         TempList.Sort;
-        TempList.SaveToFile(DataDir + '\FAMILY.DAT');
+        TempList.SaveToFile(Directories.DataDir + '\FAMILY.DAT');
         lPrevFamilyCode := '';
         for j := 0 to TempList.Count - 1 do
         begin

@@ -239,7 +239,7 @@ begin
     lFrmLoadProgress.Show;
     lProgress := 0;
     lPrevProgress := 0;
-    ChDir(datadir);
+    ChDir(Directories.datadir);
     delim :=chr(Txtsep);
     delim2 :=chr(Txtlim);
     if Txtlim = 0 then delim2:='';
@@ -308,7 +308,7 @@ begin
     if not DEETdumpTTableOut and not lStudDataFound then
       lMsg := AMG_NO_DATA_FOUND_MSG
     else
-      lMsg := Format(AMG_DATA_EXPORTED_TO_CASES21_MSG, [QuotedStr(DataDir)]);
+      lMsg := Format(AMG_DATA_EXPORTED_TO_CASES21_MSG, [QuotedStr(Directories.DataDir)]);
     MessageDlg(lMsg, mtInformation, [mbOK], 0);
   finally
     //FreeAndNil(lFrmSplitSubjectConv);

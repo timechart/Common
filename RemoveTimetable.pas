@@ -37,7 +37,7 @@ var
 begin
   cboTimetables.Clear;
   fsRec.Name := '';
-  FROMdir1 := datadir;
+  FROMdir1 := Directories.datadir;
   if FROMdir1[length(FROMdir1)] <> '\' then
      FROMdir1 := FROMdir1 + '\';
   FindFirst(FROMdir1 + '*.ttw', faArchive, fsRec);
