@@ -319,6 +319,7 @@ type
 
 
 
+
   tpIntPoint = ^ smallint;
   tpBytePoint = ^ byte;
   tpCmatrixSelection = array [0..nmbrSubYear] of smallint;
@@ -385,7 +386,7 @@ type
 
 var
 
-  DevMode: boolean = False;
+  JimsDevMode: boolean = False;
 
   FileNames: TFileNames;
   Directories: TDirectories;
@@ -1327,9 +1328,52 @@ EXALLOT.DAT
 *)
 
 
+function byterangecheck(var i: byte; j,k: smallint):boolean;
+function compareValues(a,b: integer):string; overload;
+function compareValues(a,b: string):string; overload;
+function compareValues(a,b: double):string;   overload;
+
 implementation
 
 { TFileNames }
+
+
+function compareValues(a,b: integer):string;   overload;
+begin
+  Result := '';
+  if a <> b then
+    Result:= IntToStr(a)+ ' <> ' + IntToStr(b);
+end;
+
+function compareValues(a,b: string):string; overload;
+begin
+  Result := '';
+  if a <> b then
+    Result:= '"'+a+ '" <> "' + b + '"';
+end;
+
+function compareValues(a,b: double):string;   overload;
+begin
+  Result := '';
+  if a <> b then
+    Result:= FloatToStr(a)+ ' <> ' + FloatToStr(b);
+end;
+
+function byterangecheck(var i: byte; j,k: smallint):boolean;
+begin
+ result:=true;   {now used as function in getttparams to flag a rangecheck correction}
+ if i<j then   {previous references can just ignore result}
+  begin
+   i:=j;
+   result:=false;
+  end
+ else
+  if i>k then
+   begin
+    i:=k;
+    result:=false;
+   end;
+end;
 
 function TFileNames.getTimeTableInuseDataFile: string;
 begin
