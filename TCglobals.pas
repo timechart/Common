@@ -362,6 +362,8 @@ type
 
 var
 
+  tsName: array [0..nmbrDays,0..nmbrPeriods] of String[szPeriodName];
+
   DevMode: boolean = False;
 
   FileNames: TFileNames;
@@ -1318,6 +1320,8 @@ EXALLOT.DAT
   OfferSubs                     : array of array of smallint;
 //  OfferSubs[section,0]:=count; OfferSubs[section,j]=subject in section
 *)
+
+
 
 
 implementation
