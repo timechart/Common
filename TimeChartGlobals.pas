@@ -2,7 +2,7 @@ unit TimeChartGlobals;    {global variables and constants}
 
 interface
 
-uses  WinProcs, Graphics, Forms,Controls, StdCtrls, classes,sysutils;
+uses  WinProcs, Graphics, Forms,Controls, StdCtrls, classes,sysutils, XML.UTILS, GlobalToTcAndTcextra;
 
 
 const
@@ -16,8 +16,7 @@ const
   nmbrSubjects = 3000;
   nmbrteachers = 400;
   nmbrRooms = 400;
-  nmbrDays = 10;
-  nmbrPeriods = 32; // #1474 increased from 30 to 30 | #1474 increased from 20 Mantis 
+  nmbrPeriods = 32; // #1474 increased from 30 to 30 | #1474 increased from 20 Mantis
   nmbrClass = 2000;
   nmbrLevels = 150;
   nmbrLabels = 1000;
@@ -64,7 +63,6 @@ const
   szVersion = 20;
   szTCvers = 35;
   szYearname = 10;
-  szDirName = 100;
   szSubCode = 10;
   szSubnameDefault = 25;
   szSubnameMax = 50;
@@ -92,9 +90,9 @@ const
  {network version}
   szPassID=8;   {upped from 7 to match teachers}
   szPassword=10;
-  szUserDirName=128;
+
   szTC52PassRec=17+szPassID+szUserDirName;
-     szTCP2rec=25;     {old one for load old users}
+  szTCP2rec=25;     {old one for load old users}
 
   szTCWP1rec=28+szPassID;
   szIdleDelay=100; {number of milliseconds}
@@ -269,58 +267,10 @@ const
   KeyStrRt='©Ncevy 2004ª¹°¿ NZVT FLFGRZF¶@±GP5.2 Argjbex¾´·ºß';
 
 type
-  TFileNames = class
-  private
-
-    FTimeTable: string;
-    FCurentTimeTable: string;
-
-    function getTimeTable: string;
-    procedure setTimeTable(_value: string);
-
-    function getCurentTimeTable: string;
-    procedure setCurentTimeTable(_value: string);
-
-    function getTimeTableInuseDataFile: string;
-  public
-    //Actual Name of the TimeTable in use (ie. value read from  TimeTableInuseDataFile
-    property  CurentTimeTable: string read  getCurentTimeTable write  setCurentTimeTable;
-
-    // normally can be same as CurentTimeTableName except when have opened different timetable
-    property LoadedTimeTable: String read getTimeTable write setTimeTable;
-
-    // Name of the file where the  TimeTableInuseName is saved
-    property  CurentTimeTableConfiguration: string read getTimeTableInuseDataFile;
-  end;
-
-  {names of directories}
-  TDirectories = class
-    // loads from DIR.SYS in application directory
-    //  First line is progdir second is datdire
-    // D:\amig\Source\TCNET
-    // C:\TimeChartJim\20y1
-    private
-      fdatadir: String;
-      function GetDataDir: string;
-      procedure SetDataDir(_value: string);
-    public
-        progdir: String[szDirName];
-        UsersDir: String[szDirName];
-        blockdir: String[szDirName];
-        textdir: String[szDirName];
-        timedir: String[szDirName];
-        browsedir: String[szDirName];
-        RMExportDir: string;
-        userDir:      String[szUserDirName];
-        defDataDir:   String[szDirName];
-        property datadir: String read GetDataDir write SetDataDir;
-    end;
 
 
 
-
-
-  tpIntPoint = ^ smallint;
+  tpIntPoint = ^smallint;
   tpBytePoint = ^ byte;
   tpCmatrixSelection = array [0..nmbrSubYear] of smallint;
   tpYearData = array [0..nmbrSubYear] of smallint;
@@ -328,14 +278,12 @@ type
   tpSubData = array [0..nmbrSubjects] of smallint;
   tpstudentdata = array [0..nmbrstudents] of smallint;
   tpClassShown = array [0..nmbrLevels, 0..nmbrYears] of smallint;
-  tpFclash = array [0..nmbrDays, 0..nmbrPeriods] of smallint;
   tpTeData = array [0..nmbrteachers] of smallint;
   tplevelSub = array [0..nmbrLevels] of smallint;
   tpAdd = array [0..nmbrCustom] of String[szCustomAdd];
   tpTtParameters = array [0..1000] of byte;
   tpEdit9 = array [1..nmbrchoices] of tedit;
 
-  tpTtDayBlock = array [1..szTTDayBlock] of byte;
   tpWSBlock = array of byte;
   tpWSFclash = array [0..nmbrblocks] of smallint;
 
@@ -388,8 +336,6 @@ var
 
   JimsDevMode: boolean = False;
 
-  FileNames: TFileNames;
-  Directories: TDirectories;
 //  studID2: array[0..nmbrstudents] of string[szID];
   studID2: array[0..nmbrstudents] of string[50];
   studEmail: array[0..nmbrstudents] of string[100];
@@ -732,27 +678,15 @@ var
   {timetable data}
   Lnum                          : smallint;
   TcLabel                       : array [0..nmbrLabels] of String[szTcLabel];
-  Tclash                        : tpFclash;
-  Rclash                        : tpFclash;
-  Fclash                        : tpFclash;
-  TclashTot,RclashTot           : integer;
-  level                         : array [-1..nmbrYears] of smallint; {no. of levels in year}
-  Blocks                        : array [-1..nmbrYears] of smallint; {number of blocks in year}
-  LevelMax                      : smallint;
-  LevelPrint                    : smallint;
+
   ttmem1, ttmem2, ttmem3        : smallint;
   ttFileHeader                  : string[7]; {first 7 bytes in ttfile} {standard one only}
-  ttParameters                  : ^ tpTtParameters;
-  ttMain                        : array [0..nmbrDays - 1] of ^ tpTtDayBlock;
-  ttMainFormat                  : byte;
+  ttParameters                  : ^tpTtParameters;
   ttNewFormat                   : wordbool;
   ttUndoPtr                     : integer=0;
   ttUndoMax                     : integer=0;
   levelsUsed                    : integer;
-  years                         : byte; {years}
-  yr                            : byte; {years-1}
-  periods                       : byte; {periods}
-  days                          : byte; {days}
+
  {worksheet}
   wsMain: array of tpWSblock;
   wsBlocks                      : smallint=10; {number of worksheet blocks}
@@ -784,12 +718,7 @@ var
   StudPasteFields: smallint=1;
   StudPasteAddSub               : wordbool=false;
  {timetable positions}
-  dl,pl,yl,ll                   : byte; {top left timetable}
-  nd,np,ny,nl                   : byte; {current position}
-  hd,hp,hy,hl                   : byte; {home position}
-  warn,WSeWarn,WSmWarn          : bytebool; {warning flag}
-  arrow                         : byte; {a}
-  box                           : byte; {b - cell,level etc if >6 then 0}
+  
   trackflag                     : wordbool; {entry dialog - track timetable }
   abOverwrite                   : wordbool;
   AlterBox,wsAlterBox           : smallint;
@@ -1328,10 +1257,18 @@ EXALLOT.DAT
 *)
 
 
-function byterangecheck(var i: byte; j,k: smallint):boolean;
 function compareValues(a,b: integer):string; overload;
 function compareValues(a,b: string):string; overload;
 function compareValues(a,b: double):string;   overload;
+procedure IntRange(var i: smallint; j,k: smallint);
+procedure daygroupCount;
+function Space(StringLength: smallint):string;
+function StringPad(charcount:smallint; charval:smallint):string;
+function StringPadChr(charcount:smallint; charchr:string):string;
+function FNT(d,p,y,l,offset: smallint): tpIntPoint;
+function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
+function RpadString(S:string; L: smallint):string;
+function LpadString(S:string; L: smallint):string;
 
 implementation
 
@@ -1352,6 +1289,85 @@ begin
     Result:= '"'+a+ '" <> "' + b + '"';
 end;
 
+procedure IntRange(var i: smallint; j,k: smallint);
+begin
+ if i<j then i:=j
+  else if i>k then i:=k;
+end;
+
+procedure daygroupCount;
+var
+ gs: array[0..nmbrdays] of smallint;
+ i:     smallint;
+begin
+ numDayGroups:=0;
+for i:=1 to days do gs[i]:=0;
+ for i:=1 to days do inc(gs[DayGroup[i-1]]);
+ for i:=1 to days do if gs[i]>0 then inc(numDayGroups);
+end;
+
+function Space(StringLength: smallint):string;
+begin
+ result:=StringPad(Stringlength,32);
+end;
+
+function StringPad(charcount:smallint; charval:smallint):string;
+var
+ i:     smallint;
+ tmpStr:        string;
+begin
+ tmpStr:=''; result:=tmpStr;
+ if charcount<=0 then exit;  {return blank string}
+ for i:=1 to charcount do
+  tmpStr:=tmpStr+chr(charval);
+ result:=tmpStr;
+end;
+
+function StringPadChr(charcount:smallint; charchr:string):string;
+var
+ charval:  smallint;
+begin
+ charval:=Ord(charchr[1]);
+ result:=StringPad(charcount,charval);
+end;
+
+function FNT(d,p,y,l,offset: smallint): tpIntPoint;
+var
+ Ad:            word;
+ TempPointer:   pointer;
+ IntPoint:      tpIntPoint;
+begin
+  tempPointer:=TtMain[d]; //ttMain : array [0..nmbrDays - 1] of ^ tpTtDayBlock;
+  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
+  IntPoint:=tempPointer;
+  inc(IntPoint,(Ad div 2));
+  result:=IntPoint;
+end;
+
+function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
+var
+ Ad:            word;
+ TempPointer:   pointer;
+ BytePoint:      tpBytePoint;
+begin
+  tempPointer:=TtMain[d];
+  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
+  BytePoint:=tempPointer;
+  inc(BytePoint,Ad);
+  result:=BytePoint;
+end;
+
+function RpadString(S:string; L: smallint):string;
+begin
+ RpadString:=S+space(L-length(S));
+end;
+
+function LpadString(S:string; L: smallint):string;
+begin
+ LpadString:=space(L-length(S))+S;
+end;
+
+
 function compareValues(a,b: double):string;   overload;
 begin
   Result := '';
@@ -1359,71 +1375,11 @@ begin
     Result:= FloatToStr(a)+ ' <> ' + FloatToStr(b);
 end;
 
-function byterangecheck(var i: byte; j,k: smallint):boolean;
-begin
- result:=true;   {now used as function in getttparams to flag a rangecheck correction}
- if i<j then   {previous references can just ignore result}
-  begin
-   i:=j;
-   result:=false;
-  end
- else
-  if i>k then
-   begin
-    i:=k;
-    result:=false;
-   end;
-end;
 
-function TFileNames.getTimeTableInuseDataFile: string;
-begin
-  Result := 'TTinUse.DAT';
-end;
 
-function TFileNames.getCurentTimeTable: string;
-begin
-   Result := FCurentTimeTable;
-end;
-
-function TFileNames.getTimeTable: string;
-begin
-    Result := FTimeTable;
-end;
-
-procedure TFileNames.setCurentTimeTable(_value: string);
-begin
-  if FCurentTimeTable = _value  then
-      Exit;
-  FCurentTimeTable :=  _value;
-end;
-
-procedure TFileNames.setTimeTable(_value: string);
-begin
-    if FTimeTable = _value  then
-      Exit;
-    FTimeTable :=  _value;
-end;
 
 { TDirectories }
 
-
-function TDirectories.GetDataDir: string;
-begin
-   Result := fDataDir;
-end;
-
-procedure TDirectories.SetDataDir(_value: string);
-begin
-   fDataDir :=  _value;
-end;
-
-initialization
-  FileNames:= TFileNames.Create;
-  Directories:= TDirectories.Create;
-
-finalization
-  FileNames.free;
-  Directories.Free;
 
 end.
 

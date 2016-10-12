@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, NiceGrid, Contnrs, StdCtrls, Grids;
+  Dialogs, ExtCtrls, NiceGrid, Contnrs, StdCtrls, Grids, XML.UTILS;
 
 type
   TFrmCASES21ExportDataView = class(TForm)

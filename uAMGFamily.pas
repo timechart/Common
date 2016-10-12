@@ -3,7 +3,7 @@ unit uAMGFamily;
 interface
 
 uses
-  uAMGItem, uAMGStudent;
+  uAMGItem, uAMGStudent, XML.UTILS;
 
 type
   TAMGFamily = class(TAMGItem)
