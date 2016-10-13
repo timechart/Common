@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, ppParameter, ppBands, ppCtrls, ppVar, ppPrnabl, ppClass,
   ppCache, ppProd, ppReport, ppDB, ppComm, ppRelatv, ppDBJIT, Contnrs, uAMGCommon,
-  ppStrtch, ppMemo;
+  ppStrtch, ppMemo,GlobalToTcAndTcextra;
 
 type
   TTeacherLoads = class;

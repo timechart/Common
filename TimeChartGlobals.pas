@@ -268,10 +268,6 @@ const
 
 type
 
-
-
-  tpIntPoint = ^smallint;
-  tpBytePoint = ^ byte;
   tpCmatrixSelection = array [0..nmbrSubYear] of smallint;
   tpYearData = array [0..nmbrSubYear] of smallint;
   tpPeriodData = array[0..nmbrPeriods] of smallint;
@@ -679,7 +675,6 @@ var
   Lnum                          : smallint;
   TcLabel                       : array [0..nmbrLabels] of String[szTcLabel];
 
-  ttmem1, ttmem2, ttmem3        : smallint;
   ttFileHeader                  : string[7]; {first 7 bytes in ttfile} {standard one only}
   ttParameters                  : ^tpTtParameters;
   ttNewFormat                   : wordbool;
@@ -1265,8 +1260,6 @@ procedure daygroupCount;
 function Space(StringLength: smallint):string;
 function StringPad(charcount:smallint; charval:smallint):string;
 function StringPadChr(charcount:smallint; charchr:string):string;
-function FNT(d,p,y,l,offset: smallint): tpIntPoint;
-function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
 function RpadString(S:string; L: smallint):string;
 function LpadString(S:string; L: smallint):string;
 
@@ -1331,31 +1324,6 @@ begin
  result:=StringPad(charcount,charval);
 end;
 
-function FNT(d,p,y,l,offset: smallint): tpIntPoint;
-var
- Ad:            word;
- TempPointer:   pointer;
- IntPoint:      tpIntPoint;
-begin
-  tempPointer:=TtMain[d]; //ttMain : array [0..nmbrDays - 1] of ^ tpTtDayBlock;
-  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
-  IntPoint:=tempPointer;
-  inc(IntPoint,(Ad div 2));
-  result:=IntPoint;
-end;
-
-function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
-var
- Ad:            word;
- TempPointer:   pointer;
- BytePoint:      tpBytePoint;
-begin
-  tempPointer:=TtMain[d];
-  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
-  BytePoint:=tempPointer;
-  inc(BytePoint,Ad);
-  result:=BytePoint;
-end;
 
 function RpadString(S:string; L: smallint):string;
 begin

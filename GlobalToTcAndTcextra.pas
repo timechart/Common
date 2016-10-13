@@ -76,6 +76,8 @@ const
 type
   tpTtDayBlock = array[1..szTTDayBlock] of byte;
   tpFclash = array [0..nmbrDays, 0..nmbrPeriods] of smallint;
+  tpIntPoint = ^smallint;
+  tpBytePoint = ^ byte;
 
 var
   ttMain:        array[0..nmbrDays-1] of ^tpTtDayBlock;
@@ -112,8 +114,41 @@ var
    d-day            6
   }
 
+  ttmem1, ttmem2, ttmem3        : smallint;
+
+function FNT(d,p,y,l,offset: smallint): tpIntPoint;
+function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
+
+
 
 
 implementation
+
+function FNT(d,p,y,l,offset: smallint): tpIntPoint;
+var
+ Ad:            word;
+ TempPointer:   pointer;
+ IntPoint:      tpIntPoint;
+begin
+  tempPointer:=TtMain[d]; //ttMain : array [0..nmbrDays - 1] of ^ tpTtDayBlock;
+  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
+  IntPoint:=tempPointer;
+  inc(IntPoint,(Ad div 2));
+  result:=IntPoint;
+end;
+
+function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
+var
+ Ad:            word;
+ TempPointer:   pointer;
+ BytePoint:      tpBytePoint;
+begin
+  tempPointer:=TtMain[d];
+  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
+  BytePoint:=tempPointer;
+  inc(BytePoint,Ad);
+  result:=BytePoint;
+end;
+
 
 end.

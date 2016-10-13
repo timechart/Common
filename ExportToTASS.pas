@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, XML.UTILS;
+  Dialogs, StdCtrls, XML.UTILS,GlobalToTcAndTcextra;
 
 type
   TFrmExportTASS = class(TForm)
