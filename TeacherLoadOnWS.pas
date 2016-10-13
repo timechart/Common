@@ -119,7 +119,7 @@ begin
   lTempList := TStringList.Create;
   lLongestLength := GetLongestLength;
   lSubjects := '';
-  for y := 0 to yr do
+  for y := 0 to years_minus_1 do
   begin
     for b := 1 to Blocks[y] do
       for l:=1 to Level[y] do
@@ -179,7 +179,7 @@ var
   begin
     FillChar(TeFound, sizeof(tefound), chr(0));
 
-    for y := 0 to yr do
+    for y := 0 to years_minus_1 do
     begin
       for b := 1 to Blocks[y] do
         for l:=1 to Level[y] do

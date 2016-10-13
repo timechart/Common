@@ -91,7 +91,7 @@ type
 var
   ttMain:        array[0..nmbrDays-1] of ^tpTtDayBlock;
   years                         : byte; {years}
-  yr                            : byte; {years-1}
+  years_minus_1                            : byte; {years-1}
   periods                       : byte; {periods}
   days                          : byte; {days}
 
