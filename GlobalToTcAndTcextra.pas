@@ -79,6 +79,15 @@ type
   tpIntPoint = ^smallint;
   tpBytePoint = ^ byte;
 
+  TIntOnChange = Class
+    FValue: integer;
+    FName: string;
+    function getValue: integer;
+    procedure setValue(_Value: integer);
+  public
+    property Value: integer read GetValue write SetValue;
+  end;
+
 var
   ttMain:        array[0..nmbrDays-1] of ^tpTtDayBlock;
   years                         : byte; {years}
@@ -114,9 +123,13 @@ var
    d-day            6
   }
 
-  ttmem1, ttmem2, ttmem3        : smallint;
+  ttMemorySetting1: TIntOnChange;
+  ttMemSetting2: TIntOnChange;
+  ttMemSetting3: TIntOnChange;
 
-function FNT(d,p,y,l,offset: smallint): tpIntPoint;
+  Version:      String[szVersion];  {20 version$}
+
+function FNT(_Day,_Period,_Year,_Level,offset: smallint): tpIntPoint;
 function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
 
 
@@ -124,14 +137,15 @@ function FNTbyte(d,p,y,l,offset: smallint): tpBytePoint;
 
 implementation
 
-function FNT(d,p,y,l,offset: smallint): tpIntPoint;
+function FNT(_Day,_Period,_Year,_Level,offset: smallint): tpIntPoint;
 var
  Ad:            word;
  TempPointer:   pointer;
  IntPoint:      tpIntPoint;
 begin
-  tempPointer:=TtMain[d]; //ttMain : array [0..nmbrDays - 1] of ^ tpTtDayBlock;
-  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
+  tempPointer:=TtMain[_Day]; //ttMain : array [0..nmbrDays - 1] of ^ tpTtDayBlock;
+  Ad:=(word(ttMemSetting2.Value)*word(_Period))+(word(ttMemorySetting1.Value)*word(_Year))+(8*word(_Level))+word(offset);
+  //ttmem1, ttmem2, ttmem3        : smallint;
   IntPoint:=tempPointer;
   inc(IntPoint,(Ad div 2));
   result:=IntPoint;
@@ -144,11 +158,36 @@ var
  BytePoint:      tpBytePoint;
 begin
   tempPointer:=TtMain[d];
-  Ad:=(word(ttmem2)*word(P))+(word(ttmem1)*word(Y))+(8*word(L))+word(offset);
+  Ad:=(word(ttMemSetting2.Value)*word(P))+(word(ttMemorySetting1.Value)*word(Y))+(8*word(L))+word(offset);
   BytePoint:=tempPointer;
   inc(BytePoint,Ad);
   result:=BytePoint;
 end;
 
+
+{ TIntOnChange }
+
+function TIntOnChange.getValue: integer;
+begin
+    result := fValue;
+end;
+
+procedure TIntOnChange.setValue(_Value: integer);
+begin
+   fValue :=  _Value;
+end;
+
+initialization
+  ttMemorySetting1:= TIntOnChange.Create;
+  ttMemorySetting1.FName :=  'ttMemorySetting1';
+  ttMemSetting2:= TIntOnChange.Create;
+  ttMemorySetting1.FName :=  'ttMemSetting2';
+  ttMemSetting3:= TIntOnChange.Create;
+  ttMemorySetting1.FName :=  'ttMemSetting3';
+
+finalization
+  ttMemorySetting1.Free;
+  ttMemSetting2.Free;
+  ttMemSetting3.Free;
 
 end.

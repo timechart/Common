@@ -660,7 +660,6 @@ var
   prntblankwidth                : smallint;
   {General}
   School                        : String[szSchool]; {50 sc$}
-  ttVersion                     : String[szVersion]; {20 version$}
   TCvers                        : String[szTCvers]; {20 TCvers$}
   NumCodes                      : array [0..2] of smallint; {nsub(2)} {subject,teacher,room}  //Number of Codes
   lencodes                      : array [0..2] of smallint; {lsub(2)}                         //Data Size for the codes
