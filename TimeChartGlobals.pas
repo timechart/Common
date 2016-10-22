@@ -171,7 +171,6 @@ const
       +' used for duties rather than lessons.',                                     //36
     'When your timetable is nearly complete, use Room Fill to add missing rooms.'); //37
 
-  OldUserPasswordFilename='TCWP52.DAT';
   myLogOnFileExt='.ON';
   accessCountMax=120;
 
@@ -369,7 +368,6 @@ var
   usrpassAlter:           bool;
   CurrentUserRecordIndex:          smallint;
 
-  UserRecordsCount:                smallint;
   NEW_DateChecks:         array[0..41] of tDateTime;
  //track which sections the user has locked at any stage
   usrDataSectionLocked: array[1..accessCountMax] of bool;

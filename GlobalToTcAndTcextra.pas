@@ -3,6 +3,11 @@
 interface
 
 const
+
+        OldUserPasswordFilename='TCWP52.DAT';
+  OldExtrasUserPasswordFilename='TCEWP52.DAT';
+  // UserPasswordFilename='TCEWP52.DAT';
+
   szTTDayBlock=48100;
 
   nmbrDays=10;
@@ -89,6 +94,7 @@ type
   end;
 
 var
+  UserRecordsCount:                smallint;
   ttMain:        array[0..nmbrDays-1] of ^tpTtDayBlock;
   years                         : byte; {years}
   years_minus_1                            : byte; {years-1}
