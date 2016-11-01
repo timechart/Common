@@ -28,7 +28,7 @@ const
   nmbrCustom=30;
   nmbrSubsInFaculty=200;  // was 100
   nmbrTeFacs = 4;
-  nmbrWindows=30; // was 29
+  nmbrWindows = 40; {extra for floating toolbars etc.}
   nmbrTags=8;
   maxWinScrollRange:integer=2140483647;
   minCodeFit=5;
