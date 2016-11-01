@@ -33,7 +33,6 @@ const
   nmbrCustom = 30;
   nmbrSubsInFaculty = 200; // was 100  #996
   nmbrTeFacs = 4;
-  nmbrWindows = 40; {extra for floating toolbars etc.}
   nmbrTags = 16;
   nmbrBoxes=21;
   nmbrTrackSems=8;
@@ -274,6 +273,7 @@ type
   tpstudentdata = array [0..nmbrstudents] of smallint;
   tpClassShown = array [0..nmbrLevels, 0..nmbrYears] of smallint;
   tpTeData = array [0..nmbrteachers] of smallint;
+
   tplevelSub = array [0..nmbrLevels] of smallint;
   tpAdd = array [0..nmbrCustom] of String[szCustomAdd];
   tpTtParameters = array [0..1000] of byte;
@@ -339,7 +339,6 @@ var
   UpdateReleaseDate: tDateTime;
   SupportExpiryKeyCheckDate: tDateTime;
 
-  OnlineUpdateCheck: smallint;
   LastUpdateCheck: tDateTime;
 
   textExportExtension           : string='TXT';
@@ -430,7 +429,7 @@ var
   EntrySelectionLink            : wordbool;
   customFileLoad                : string;
   customFileLoadFlag            : wordbool;
-  tcfont,previewfont:           Tfont;
+  previewfont:           Tfont;
   txtHeight                     : smallint;
   Hmargin                       : smallint;
   blankwidth                    : smallint;
@@ -445,36 +444,23 @@ var
   txt_f                         : textfile;
   {txt_filename: string;}
   {for DISPLAY.DAT}
-  winOrder                      : array [0..nmbrWindows] of smallint; {display.dat}
-  winOrderNum                   : smallint;
+  
   prefNotebookPageIndex         : smallint;
-  sTfind                        : smallint; {1-8 ,by name, sex etc}
-  commonDataAll                 : wordbool;
-  editBlockCheck                : wordbool;
+
   StInputDlgPageIndex           : smallint;
   {stud list win}
-  StudListType                  : smallint;  {1-7}
-  ListNumberType                : smallint; {1-6}
+  
   listEnrolment                 : wordbool;
   listShowClashes               : wordbool;
-  listRanges                    : array [1..4, 1..2] of smallint; {class to & from, then house then tutor then room}
   liststudentselection          : tpstudentdata;
   {teaacher clashes}
   tcCurPeriodOnly               : wordbool;
   {room clashes}
   rcCurPeriodOnly               : wordbool;
   {stud ttable}
-  stuttEnrolment                : wordbool;  //show enrolments under student weekly timetable
-  studentttselection            : tpstudentdata;
-  StudTtListType            : smallint;
-  stuttlistVals                 : array [1..8] of smallint;
+
   {stud find}
   studfindnum                   : smallint;
-  {teach ttable}
-  tettselection                 : tpTeData;
-  tettseltype                   : smallint;
-  tettLoads                     : wordbool; {show loads with weekly teacher tt}
-  tettlistVals                  : array [1..5] of smallint;
   {teacher loads}
   Teaching                      :array of smallint; {count of times taught}
   teload:            array of double;  {time allotment taught}
@@ -484,64 +470,17 @@ var
   teallot:           array[0..nmbrsubjects] of double;  {allotment of teacher subjects}
   SuMale,SuFemale: array[0..nmbrSubjects,-1..nmbryears-1] of smallint; {student counts}
   {room ttable}
-  rottselection                 : tpTeData;
-  rottseltype                   : smallint;
-  rottlistVals                  : array [1..5] of smallint;
+
   {sub ttable}
-  subttlistSelection            : smallint;
-  subttlistVals                 : array [1..4] of smallint;
+
   subttGroupCnt                 : smallint;
-  subttGroup                    : tplevelSub;
   subttWide                     : boolean;
-  {tt print selection dlg}
-  ttprntselsubg                 : tpSubData;
-  ttprntselteachg               : tpTeData;
-  ttprntselroomg                : tpTeData;
-  ttprntseltype                 : smallint;
-  ttPrntFac               : smallint;
-  ttprntselday                  : smallint;
-  ttprntselyear                 : smallint;
-  ttPrntType             : smallint;
-  {group of teachers dlg}
-  grpofteselsubg                : tpSubData;
-  grpofteyear                   : smallint;
-  grpofteclass                  : smallint;
-  grpoftelevel                  : smallint;
-  grpoftefac                    : smallint;
-  grpofteday                    : smallint;
-  grpoftetimes                  : smallint;
-  {clash  matrix  win}
-  clashmatrixselection          : tpCmatrixSelection;
-  {teachers  free dlg}
-  TeFreeSelect         : tpTeData;
-  teachersfreeday               : smallint;
-  TeFreePeriod            : smallint;
-  teachersfreefac               : smallint;
-  teachersfreeshow1             : smallint; {1..3, time slot/frees/teacher}
-  teachersfreeshow2             : smallint; {1..3, all/selection/year }
-  teFreeYear                    : smallint;
+
   {rooms free dlg}
-  RoomsFreeSelection            : tpTeData;
-  roomsfreeday                  : smallint;
-  roomsfreePeriod               : smallint;
-  roomsfreefac                  : smallint;
-  roomsfreeshow1                : smallint; {1..3, time slot/frees/room}
-  roomsfreeshow2                : smallint; {1..2, all/selection/ }
-  {teacher times dlg}
-  TeTimesSelect         : tpTeData;
-  teachertimesyear              : smallint;
-  teachertimesfac               : smallint;
-  teachertimesshow1             : smallint; {1..3, time slot/frees/teacher}
-  teachertimesshow2             : smallint; {1..3, all/selection/faculty }
+  
+  
   SubSexCountFlg                : boolean=true;
-  {teacher list dlg}
-  teListSelection               : tpTeData;
-  teListFac                     : smallint;
-  teListShow                    : smallint; {1..2, all/selection}
-  {subject times dlg}
-  subjecttimesyear              : smallint;
-  subjecttimesfac               : smallint;
-  subjecttimesshow2             : smallint; {1..3, all/selection/faculty }
+  
   {student input}
   studentinputselection         : tpstudentdata;
   StInputPref1             : smallint;
@@ -574,16 +513,10 @@ var
   {1-summary, 2-details, 3-lines (no gaps), 4-lines(with gaps)}
   blockclashesoldyear           : smallint;
   {sub list win}
-  SubListType              : smallint;
-  SubListGroupType      : smallint;
-  sublistRanges                 : array [-2..nmbrOfGroupSubjects] of smallint;
+
   sublistYear                   : smallint;
   {-2 & -1 ==> sub range, 0 = count for group 1+ is group}
-  sublistfacnum                 : smallint;
-  sublistday,
-  sublisttime1,
-  sublisttime2                  : smallint;
-  sublistfree                   : smallint;
+
   fgTTtoolbar               : wordbool=false;
   fgBlockToolbar            : wordbool=false;
   fgGenToolbar              : wordbool=false;
@@ -667,7 +600,6 @@ var
   TC4fileHeader                 : String[4];
   FontColorPair:   array[0..nmbrColourPairs,1..2] of tcolor;
   FontColorHiLitePair:   array[0..nmbrColourPairs,1..2] of tcolor;
-  winpos                        : array [0..nmbrWindows] of tpWinPos;
   {timetable data}
   Lnum                          : smallint;
   TcLabel                       : array [0..nmbrLabels] of String[szTcLabel];
@@ -950,7 +882,6 @@ var
   {transfer data}
   fileout: boolean;
   {sort data}
-  sortType: array [0..2] of smallint; {0,1, or 2}
   code: smallint;
   codepoint:      array[0..nmbrSubjects,0..2] of smallint;
   codeCount: array [0..2] of smallint;
