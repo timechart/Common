@@ -482,15 +482,8 @@ var
   SubSexCountFlg                : boolean=true;
   
   {student input}
-  studentinputselection         : tpstudentdata;
-  StInputPref1             : smallint;
-  StInputPref2             : smallint;
-  StInputClass             : smallint;
-  StInputHouse             : smallint;
-  StInputTutor             : smallint;
-  StInputRoom              : smallint;
-  studentinputshow1             : smallint;
-  studentinputshow2             : smallint;
+  
+  
 
  {subjects offered}
   OfferFile,OfferBlocks         : string;
