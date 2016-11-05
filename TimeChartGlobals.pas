@@ -400,9 +400,6 @@ var
 
   ///  debugSpeedTime:    array[0..50,0..4] of word;
   fgsubBySubListZeroSkip        : wordbool;
-  globalHints                   : wordbool;
-  OKbackup                      : wordbool;
-  OKquitcheck                   : wordbool;
   VertTile                      : wordbool=false;
                 
   DEETQuiltKey                  : ansistring;
@@ -425,7 +422,6 @@ var
   wnFlag: array[0..nmbrWindows] of boolean;
   winView,winViewMax:    array[0..nmbrWindows] of smallint;
 
-  showHintsDlg                  : wordbool;
   EntrySelectionLink            : wordbool;
   customFileLoad                : string;
   customFileLoadFlag            : wordbool;
@@ -433,7 +429,6 @@ var
   txtHeight                     : smallint;
   Hmargin                       : smallint;
   blankwidth                    : smallint;
-  Formfeed                      : wordbool;
   GenericTtableFlag             : wordbool;
   FExportFileIdx                : Integer;
   FIsLandscape                  : Integer;
@@ -444,19 +439,15 @@ var
   txt_f                         : textfile;
   {txt_filename: string;}
   {for DISPLAY.DAT}
-  
-  prefNotebookPageIndex         : smallint;
+
 
   StInputDlgPageIndex           : smallint;
   {stud list win}
   
-  listEnrolment                 : wordbool;
-  listShowClashes               : wordbool;
+
+  
   liststudentselection          : tpstudentdata;
-  {teaacher clashes}
-  tcCurPeriodOnly               : wordbool;
-  {room clashes}
-  rcCurPeriodOnly               : wordbool;
+
   {stud ttable}
 
   {stud find}
@@ -494,8 +485,7 @@ var
   OfferSubMax                   : smallint;
   OfferSubs                     : array of array of smallint;
 
-  {promote students dlg}
-  clearstudentchoicesflag       : wordbool;
+
   {flags for dlgs}
   fEntryDlgUp                   : wordbool=false;
   fwsEntryDlgUp                 : wordbool=false;
@@ -514,13 +504,10 @@ var
   fgBlockToolbar            : wordbool=false;
   fgGenToolbar              : wordbool=false;
   fgWStoolbar               : wordbool=false;
-  fgReshowTTtoolbar         : wordbool=false;
-  fgReshowBlockToolbar      : wordbool=false;
+
+
   fgReshowGenToolbar        : wordbool=false;
-  fgReshowWStoolbar         : wordbool=false;
-  fgTTtoolbarDock           : smallint=1;
-  fgBlockToolbarDock        : smallint=1;
-  fgGenToolbarDock          : smallint=1;
+
   fgWStoolbarDock           : smallint=1;
   {fontWidths}
   fwCode                        : array [0..2] of smallint;
@@ -549,8 +536,7 @@ var
   fwTeDutyLoad: smallint;
   {printing}
   PrinterOn,PreviewOn,TextFileOut,CopyOut: boolean;
-  PreviewLastZoom:  smallint;
-  colorPrinterFlag:                wordbool;
+
   myCopyString:     AnsiString;
   PreviewWin:       smallint;
   fwprntCode                    : array [0..2] of smallint;
@@ -579,8 +565,7 @@ var
   prnttxtHeight                 : smallint;
   prntHmargin                   : smallint; {canvas units}
   prntVmargin                   : smallint;
-  prntLeftMargin,
-  prntTopMargin                 : single; {keep cm wanted}
+
   prntblankwidth                : smallint;
   {General}
   School                        : String[szSchool]; {50 sc$}
@@ -630,29 +615,20 @@ var
   rotype: array[0..nmbrTeachers] of smallint;
   rassign: array[0..nmbrTeachers] of smallint;
   {student paste}
-  StudPasteID: smallint=2;
-  StudPasteSub: smallint=1;
-  StudPasteFields: smallint=1;
-  StudPasteAddSub               : wordbool=false;
+
  {timetable positions}
-  
-  trackflag                     : wordbool; {entry dialog - track timetable }
-  abOverwrite                   : wordbool;
-  AlterBox,wsAlterBox           : smallint;
-  SearchBox                     : smallint;
+
   Fsub,Fteach,Froom,Fblock,
   Fshare,Fdouble,Ffix           : smallint;
   Rsub,Rteach,Rroom,Rblock,
   Rshare,Rdouble,Rfix           : smallint;
-  chScope,
-  chType                        : smallint; {timetable clash help}
+
   chTeGroup,chRoGroup           : array [1..8] of smallint;
   chd,chp,chy,chl               : smallint; {clash help position}
   {Blocks data}
   Cmatrix:      array of array of smallint;
-  blocklevel                    : smallint; {no. of levels in blocks}
+
   BlFull                        : boolean=false; {blocks full}
-  blocknum                      : smallint; {no. of blocks}
   Fix                           : array [0..nmbrBlocks] of smallint;
   FixCount: smallint; {fix}
   sheet: array [0..nmbrBlocks, 0..nmbrLevels] of smallint;
@@ -668,12 +644,9 @@ var
   SubStMax: tpSubData;
   SubStMaxPoint: array of smallint;
   Excludenum: smallint;
-  MaxClassSize: smallint;
-  BLsolution,BLtries: smallint; {create blocks}
-  ExcludeClassSize: smallint;
-  SplitDiff: wordbool;
+
   toomanysubs: bool;
-  sexbalance,autobalance,balanceflag: smallint;
+  sexbalance: smallint;
 
   {student clash help variables}
   BlClash:        array [0..nmbrSolutions, 0..nmbrBlocks] of smallint;
@@ -751,7 +724,6 @@ var
    {variable time slots in each day}
   tsCode:          array [0..nmbrDays,0..nmbrPeriods] of string[sztslotcode];
   TimeSlotName: array [0..nmbrDays,0..nmbrPeriods] of String[szPeriodName];
-  tsOn: array  [0..nmbrDays,0..nmbrPeriods] of boolean;  
   tsShow: array[0..nmbrDays,0..nmbrPeriods] of smallint;
   dg: array[0..nmbrdays,0..nmbrdays] of smallint; {dg - day group}
 
@@ -789,40 +761,22 @@ var
   ourSafetyMemStream: TStream;
   ourSafetyMemStreamStr: string;
 
-  {printer settings}
-  datestamp: wordbool;
-  double_space: wordbool;
-  double_print: smallint;
+
   {display settings}
   DOSscreenmem: string[20];
-  blockshow: wordbool;
-  sexselect: smallint;
-  sTselect: smallint;
-  Tfreeshow: wordbool;
-  Rfreeshow: wordbool;
-  ttWeekDaysFlg,ttClockShowFlg:  wordbool;
-  fsDoRoomCap: wordbool;
-  Tyr: smallint;
-  Txtsep: smallint;
-  Txtlim: smallint;
-  sTyear: wordbool;
+
+
   FAfirst,FAsex,FAclass,FAID,FAhouse: wordbool;
   FAsubnum: smallint;
   FAreplace,FAtutor,FAhome,FAyear: wordbool;
-  Pyear: array [0..nmbrYears] of boolean;
   Tlimit: array [0..nmbrDays] of smallint;
   ttcalcD,ttcalcP,ttcalcY,ttcalcL: smallint;
-  Dprint: array[0..nmbrDays] of boolean;
-  Pweek: smallint;
+
   PweekCount: smallint;
   {Student Display settings}
-  sTsex: wordbool;
-  sTclass: wordbool;
-  sThouse: wordbool;
-  sTtutor: wordbool;
-  sThome: wordbool;
-  sTID: wordbool;
-  sTtag: wordbool;
+
+
+
   sTID2: wordbool;
   stEmail: wordbool;
   {Tag data}
@@ -871,7 +825,6 @@ var
   facName: array [0..nmbrFaculty] of string[szFacName]; {fa$(30)}
   facSubs: array [0..nmbrFaculty, 0..nmbrSubsInFaculty] of smallint;
   FacNum: smallint; {fn}
-  EdfacSubType: smallint; {edit faculty dialogue}
   {transfer data}
   fileout: boolean;
   {sort data}

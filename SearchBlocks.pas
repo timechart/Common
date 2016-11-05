@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons;
+  Dialogs, StdCtrls, Buttons, XML.DISPLAY;
 
 type
   TFrmSearchBlocks = class(TForm)
@@ -38,7 +38,7 @@ var
   lFound: Boolean;
 begin
   lFound := False;
-  for lBlkIdx := FNextBlock to blocknum do
+  for lBlkIdx := FNextBlock to XML_DISPLAY.blocknum do
   begin
     for lLvlIdx := FNextLevel to Sheet[lBlkIdx, 0] do
     begin

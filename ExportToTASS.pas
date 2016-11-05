@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, XML.UTILS,GlobalToTcAndTcextra;
+  Dialogs, StdCtrls, XML.UTILS,GlobalToTcAndTcextra, XML.DISPLAY;
 
 type
   TFrmExportTASS = class(TForm)
@@ -217,7 +217,7 @@ var
       end;  // for Year
       if lDataFound then
       begin
-        lFrmLoadProgress.UpdateProgress(25, Format(AMG_EXPORTING_YEAR_TTABLE_MSG, ['group', GOSname[GOSmenu[GroupIndexDisplay]]]), 900);
+        lFrmLoadProgress.UpdateProgress(25, Format(AMG_EXPORTING_YEAR_TTABLE_MSG, ['group', GOSname[GOSmenu[XML_DISPLAY.GroupIndexDisplay]]]), 900);
         lFrmLoadProgress.UpdateProgress(25, AMG_TIMETABLE_EXPORT_COMPLETE, 2500);
       end;
     finally
@@ -240,9 +240,9 @@ begin
     lProgress := 0;
     lPrevProgress := 0;
     ChDir(Directories.datadir);
-    delim :=chr(Txtsep);
-    delim2 :=chr(Txtlim);
-    if Txtlim = 0 then delim2:='';
+    delim :=chr(XML_DISPLAY.Txtsep);
+    delim2 :=chr(XML_DISPLAY.Txtlim);
+    if XML_DISPLAY.Txtlim = 0 then delim2:='';
     lStudDataFound := False;
     RefreshTimetabledSubjects;
     for j := 1 to GroupNum do
