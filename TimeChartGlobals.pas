@@ -378,12 +378,9 @@ var
   CustomerIDnum: integer=0;
   Cases21Flag : boolean=false;
   OberonShow: boolean=false;
-  OberonOutputType              : smallint;
-  EnrolBarcodeFlg              : wordbool=false;
-  StHeadShow                   : wordbool=true;
+
 
  {tracking data for past choices}
-  TrackEnrolFlag:      wordbool=false;
   StudTrack: array of tpTrackData;
   HasStudTrackData: boolean=false;
 
@@ -399,7 +396,6 @@ var
   TtInUseCalendar           : string='';
 
   ///  debugSpeedTime:    array[0..50,0..4] of word;
-  fgsubBySubListZeroSkip        : wordbool;
   VertTile                      : wordbool=false;
                 
   DEETQuiltKey                  : ansistring;
@@ -413,25 +409,18 @@ var
   suMissedCnt,teMissedCnt,
     roMissedCnt                 : integer;
 
-  UseGroupFindStud              : wordbool;
+
   UseNewTTWTimetable            : wordbool=true;
-  MatchAllYears:                boolean;
   {global flags}
   needClashMatrixRecalc         : wordbool;
   loadFinished                  : wordbool;
   wnFlag: array[0..nmbrWindows] of boolean;
-  winView,winViewMax:    array[0..nmbrWindows] of smallint;
+  winView:    array[0..nmbrWindows] of smallint;
 
-  EntrySelectionLink            : wordbool;
-  customFileLoad                : string;
-  customFileLoadFlag            : wordbool;
   previewfont:           Tfont;
   txtHeight                     : smallint;
   Hmargin                       : smallint;
   blankwidth                    : smallint;
-  GenericTtableFlag             : wordbool;
-  FExportFileIdx                : Integer;
-  FIsLandscape                  : Integer;
 
   {text files}
   delim                         : string;
@@ -440,8 +429,6 @@ var
   {txt_filename: string;}
   {for DISPLAY.DAT}
 
-
-  StInputDlgPageIndex           : smallint;
   {stud list win}
   
 
@@ -465,7 +452,6 @@ var
   {sub ttable}
 
   subttGroupCnt                 : smallint;
-  subttWide                     : boolean;
 
   {rooms free dlg}
   
@@ -497,7 +483,6 @@ var
   blockclashesoldyear           : smallint;
   {sub list win}
 
-  sublistYear                   : smallint;
   {-2 & -1 ==> sub range, 0 = count for group 1+ is group}
 
   fgTTtoolbar               : wordbool=false;
@@ -508,7 +493,6 @@ var
 
   fgReshowGenToolbar        : wordbool=false;
 
-  fgWStoolbarDock           : smallint=1;
   {fontWidths}
   fwCode                        : array [0..2] of smallint;
   fwCodeBlank                   : array [0..2] of smallint; {used for ttable}
@@ -766,19 +750,12 @@ var
   DOSscreenmem: string[20];
 
 
-  FAfirst,FAsex,FAclass,FAID,FAhouse: wordbool;
-  FAsubnum: smallint;
-  FAreplace,FAtutor,FAhome,FAyear: wordbool;
   Tlimit: array [0..nmbrDays] of smallint;
   ttcalcD,ttcalcP,ttcalcY,ttcalcL: smallint;
 
   PweekCount: smallint;
   {Student Display settings}
 
-
-
-  sTID2: wordbool;
-  stEmail: wordbool;
   {Tag data}
   TagName:   array[0..nmbrTags] of string[szTagname];
   TagCode:   array[0..nmbrTags] of string[2];
